@@ -1,0 +1,11 @@
+{
+  "scenario_name": "dry_grassland_high_wind",
+  "width": 100,
+  "height": 100,
+  "timesteps": 120,
+  "seed": 101,
+  "wind_x": 3.5,
+  "wind_y": 1.8,
+  "fuel_scale": 0.4,
+  "moisture_scale": 0.10
+}

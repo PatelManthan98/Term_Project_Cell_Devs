@@ -1,0 +1,17 @@
+{
+  "scenario_name": "firebreak_test",
+  "width": 100,
+  "height": 100,
+  "timesteps": 180,
+  "seed": 1234,
+  "wind_x": 1.0,
+  "wind_y": 0.5,
+  "fuel_scale": 0.65,
+  "moisture_scale": 0.20,
+  "incombustible_areas": [
+    {"x_start": 0, "y_start": 45, "x_end": 40, "y_end": 50, "label": "firebreak_west"},
+    {"x_start": 60, "y_start": 45, "x_end": 100, "y_end": 50, "label": "firebreak_east"},
+    {"x_start": 45, "y_start": 0, "x_end": 50, "y_end": 40, "label": "firebreak_south"},
+    {"x_start": 45, "y_start": 60, "x_end": 50, "y_end": 100, "label": "firebreak_north"}
+  ]
+}

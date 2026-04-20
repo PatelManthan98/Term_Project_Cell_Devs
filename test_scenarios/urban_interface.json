@@ -1,0 +1,16 @@
+{
+  "scenario_name": "urban_interface",
+  "width": 100,
+  "height": 100,
+  "timesteps": 150,
+  "seed": 999,
+  "wind_x": 1.5,
+  "wind_y": 1.0,
+  "fuel_scale": 0.55,
+  "moisture_scale": 0.30,
+  "incombustible_areas": [
+    {"x_start": 40, "y_start": 40, "x_end": 60, "y_end": 60, "label": "urban_core"},
+    {"x_start": 70, "y_start": 10, "x_end": 85, "y_end": 25, "label": "suburb_block"},
+    {"x_start": 10, "y_start": 70, "x_end": 30, "y_end": 90, "label": "commercial_zone"}
+  ]
+}

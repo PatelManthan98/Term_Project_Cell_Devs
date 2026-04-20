@@ -1,0 +1,11 @@
+{
+  "scenario_name": "dense_forest_drought",
+  "width": 120,
+  "height": 120,
+  "timesteps": 180,
+  "seed": 314,
+  "wind_x": 1.2,
+  "wind_y": 0.5,
+  "fuel_scale": 0.90,
+  "moisture_scale": 0.08
+}
