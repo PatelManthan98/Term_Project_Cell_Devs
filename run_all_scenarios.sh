@@ -1,21 +1,42 @@
 #!/bin/bash
-# run_all_scenarios.sh — Build, run all 5 scenarios, and visualize
+# run_all_scenarios.sh
 set -e
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+BIN="$ROOT/build/wildfire_sim"
+
 echo "=== Building ==="
-bash build_sim.sh
-mkdir -p results
+bash "$ROOT/build_sim.sh"
 
-for NAME in calm windy firebreak urban fortmcmurray; do
-    echo ""; echo "=== Running: $NAME ==="
-    cd build
-    ./wildfire_sim "../scenarios/scenario_${NAME}.json" 500 42
-    mv grid_log.csv "../results/grid_log_${NAME}.csv"
-    cd ..
+if [ ! -f "$BIN" ]; then
+    echo "ERROR: build failed, executable not found"; exit 1
+fi
+
+mkdir -p "$ROOT/results"
+
+SCENARIOS="calm windy firebreak firebreak_spot urban fortmcmurray_nospot fortmcmurray_spot"
+
+echo ""
+echo "=== Running simulations ==="
+for NAME in $SCENARIOS; do
+    JSON="$ROOT/scenarios/scenario_${NAME}.json"
+    LOG="$ROOT/results/grid_log_${NAME}.csv"
+
+    if [ ! -f "$JSON" ]; then
+        echo "  SKIP $NAME — scenario file not found"; continue
+    fi
+
+    echo "  $NAME ..."
+    "$BIN" "$JSON" 500 42
+    mv "$ROOT/build/grid_log.csv" "$LOG" 2>/dev/null || \
+    mv grid_log.csv "$LOG" 2>/dev/null || true
 done
 
-echo ""; echo "=== Visualizing ==="
-for NAME in calm windy firebreak urban fortmcmurray; do
-    LOG_FILE="results/grid_log_${NAME}.csv" SCENARIO="$NAME" python3 visualize_wildfire.py
-done
-echo ""; echo "=== Done. Results in results/ ==="
-ls results/*.gif results/*.png
+echo ""
+echo "=== Visualizing ==="
+cd "$ROOT"
+python3 visualize_wildfire.py
+
+echo ""
+echo "=== Done ==="
+ls "$ROOT/results/"*.gif

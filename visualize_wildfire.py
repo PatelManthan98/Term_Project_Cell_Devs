@@ -1,29 +1,33 @@
 """
-visualize_wildfire.py  —  Run: python3 visualize_wildfire.py
-Reads results/grid_log_<name>.csv and saves results/wildfire_<name>.gif
+visualize_wildfire.py — Run: python3 visualize_wildfire.py
+Generates GIFs for all scenarios in results/
 """
 import numpy as np, pandas as pd, matplotlib.pyplot as plt
 import matplotlib.animation as animation, matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import re, os
 
-SCENARIOS  = ["calm", "windy", "firebreak", "urban", "fortmcmurray"]
+SCENARIOS = [
+    "calm",
+    "windy",
+    "firebreak",
+    "firebreak_spot",
+    "urban",
+    "fortmcmurray_nospot",
+    "fortmcmurray_spot",
+]
 GRID_SIZE  = (50, 50)
 MAX_FRAMES = 80
-
 os.makedirs("results", exist_ok=True)
 
 def make_gif(name):
     log_file = f"results/grid_log_{name}.csv"
     out_gif  = f"results/wildfire_{name}.gif"
-
     if not os.path.exists(log_file):
-        print(f"  SKIP {name} — {log_file} not found")
-        return
+        print(f"  SKIP {name} — {log_file} not found"); return
 
     df = pd.read_csv(log_file, sep=";", header=None, engine="python",
                      names=["time","model_id","cell","event","state_raw"])
-
     pat = re.compile(r"r(\d+)_c(\d+).*state:(\d+)")
     records = []
     for _, row in df.iterrows():
@@ -31,10 +35,8 @@ def make_gif(name):
         if m:
             records.append((float(row["time"]), int(m.group(1)),
                             int(m.group(2)), int(m.group(3))))
-
     if not records:
-        print(f"  SKIP {name} — no parseable records")
-        return
+        print(f"  SKIP {name} — no records"); return
 
     rdf = pd.DataFrame(records, columns=["time","row","col","state"])
     timesteps = sorted(rdf["time"].unique())
@@ -64,23 +66,27 @@ def make_gif(name):
     ], loc="lower left", fontsize=7, facecolor="#222", labelcolor="white")
 
     im    = ax.imshow(frames[0], cmap=cmap, norm=norm, origin="upper")
-    title = ax.set_title("", color="white", fontsize=11, pad=8)
+    title = ax.set_title("", color="white", fontsize=10, pad=8)
     total = GRID_SIZE[0] * GRID_SIZE[1]
 
     def update(i):
         im.set_data(frames[i])
         burning = int((frames[i]==2).sum())
         burned  = int((frames[i]==3).sum())
-        title.set_text(f"{name}  t={timesteps[i]:.0f}  |  Burning:{burning}  Burned:{burned}({burned/total*100:.1f}%)")
+        title.set_text(
+            f"{name}  t={timesteps[i]:.0f}\n"
+            f"Burning:{burning}  Burned:{burned}({burned/total*100:.1f}%)"
+        )
         return im, title
 
-    ani = animation.FuncAnimation(fig, update, frames=len(frames), interval=150, blit=True)
+    ani = animation.FuncAnimation(fig, update, frames=len(frames),
+                                  interval=150, blit=True)
     ani.save(out_gif, writer="pillow", fps=6)
     plt.close()
     print(f"  Saved: {out_gif}")
 
-print("=== Wildfire Visualizer ===")
+print("=== Wildfire Visualizer ===\n")
 for name in SCENARIOS:
-    print(f"\n[{name}]")
+    print(f"[{name}]")
     make_gif(name)
-print("\nAll done.")
+print("\nAll done. GIFs saved to results/")
