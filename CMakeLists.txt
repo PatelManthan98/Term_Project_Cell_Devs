@@ -1,14 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
-project(WildfireSpreadSimulator)
+project(wildfire_sim)
 
-include_directories(${CMAKE_SOURCE_DIR}/boost_local)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(${CMAKE_SOURCE_DIR}/libraries)
-include_directories(${CMAKE_SOURCE_DIR}/libraries/cadmium/include)
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-
-add_executable(WildfireSpreadSimulator
-    main.cpp
-    scenario.cpp
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/cadmium_v2/include
 )
+
+add_executable(wildfire_sim
+    main.cpp
+)
+
+target_link_libraries(wildfire_sim pthread)

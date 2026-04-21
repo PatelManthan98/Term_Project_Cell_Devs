@@ -1,17 +1,26 @@
-#ifndef WILDFIRE_STATE_HPP
-#define WILDFIRE_STATE_HPP
+#pragma once
+#include <iostream>
+#include <nlohmann/json.hpp>
 
-struct WildfireState {
-    double burned;     // fraction [0,1] already burned
-    double fuel;       // remaining fuel units
-    double moisture;   // moisture factor [0,1] reduces spread
-    double elevation;  // elevation (unused in simple model)
+struct WildfireCellState {
+    int state;
+    int burn_steps_remaining;
 
-    WildfireState()
-        : burned(0.0), fuel(1.0), moisture(0.0), elevation(0.0) {}
+    WildfireCellState() : state(1), burn_steps_remaining(0) {}
 
-    WildfireState(double b, double f, double m, double e)
-        : burned(b), fuel(f), moisture(m), elevation(e) {}
+    bool operator!=(const WildfireCellState& other) const {
+        return state != other.state ||
+               burn_steps_remaining != other.burn_steps_remaining;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const WildfireCellState& s) {
+        os << "{state:" << s.state << ", burn:" << s.burn_steps_remaining << "}";
+        return os;
+    }
 };
 
-#endif // WILDFIRE_STATE_HPP
+// JSON loader required by Cadmium
+inline void from_json(const nlohmann::json& j, WildfireCellState& s) {
+    j.at("state").get_to(s.state);
+    j.at("burn_steps_remaining").get_to(s.burn_steps_remaining);
+}
