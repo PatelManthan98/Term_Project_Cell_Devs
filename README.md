@@ -55,6 +55,7 @@ The simulation generates CSV logs in the results/ directory. You can visualize t
 ⬛ Black: Burned Out (Ash)
 
 **📂 Deliverables Structure**
+
 include/: Contains wildfire_cell.hpp (Asymmetric Cell definition) and wildfire_state.hpp.
 
 main.cpp: The AsymmCellDEVSCoupled model entry point.
