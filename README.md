@@ -24,6 +24,7 @@ Framework: Cadmium v2 (Included as a submodule/cloned directory)
 
 2. Setup Dependencies
 From the project root, ensure the Cadmium library is present:
+
 git clone https://github.com/SimulationEverywhere/cadmium_v2.git cadmium_v2
 
 4. Compilation
