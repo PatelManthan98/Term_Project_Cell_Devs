@@ -1,7 +1,3 @@
-"""
-visualize_wildfire.py — Run: python3 visualize_wildfire.py
-Generates GIFs for all scenarios in results/
-"""
 import numpy as np, pandas as pd, matplotlib.pyplot as plt
 import matplotlib.animation as animation, matplotlib.colors as mcolors
 import matplotlib.patches as mpatches

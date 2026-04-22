@@ -6,23 +6,6 @@
 #include <cmath>
 #include <cstdlib>
 
-/**
- * WildfireAsymmCell  —  Asymmetric Cell-DEVS wildfire model
- *
- * In the symmetric grid version every cell shares the same Moore neighbourhood.
- * Here each cell has its OWN neighbourhood, and the VICINITY value (double)
- * is a PRE-COMPUTED directional weight encoding wind, slope, and fuel
- * adjacency for each specific source→target cell pair.
- *
- *   vicinity = wind_factor × slope_factor × fuel_adjacency
- *            = 0    if a firebreak (river/road) blocks the path
- *            > 1    if strongly downwind and uphill
- *
- * The vicinity weights are produced by the Python QGIS pipeline script from
- * real DEM + land-cover data and stored directly in the scenario JSON.
- * Spread from A→B therefore differs from B→A — true asymmetry.
- */
-
 struct FuelProperties {
     double ignition_mod;
     int    burn_steps;

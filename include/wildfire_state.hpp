@@ -2,15 +2,6 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
-/**
- * Fuel type classification.
- *   0 = Water / Road  -- non-flammable firebreak
- *   1 = Grass         -- fast burning, low intensity
- *   2 = Shrub         -- moderate burn speed, medium intensity
- *   3 = Forest        -- slow burning, high intensity
- *   4 = Urban         -- moderate speed, very high intensity
- */
-
 struct WildfireCellState {
     int    state;                  // 0=non-flammable, 1=unburned, 2=burning, 3=burned
     int    fuel_type;              // 0-4 (see above)
@@ -41,8 +32,7 @@ struct WildfireCellState {
     }
 };
 
-// Required by Cadmium to deserialise cell states from JSON.
-// All new fields are optional so partial JSON (e.g. ignition overrides) still work.
+
 inline void from_json(const nlohmann::json& j, WildfireCellState& s) {
     if (j.contains("state"))                 j.at("state").get_to(s.state);
     if (j.contains("fuel_type"))             j.at("fuel_type").get_to(s.fuel_type);
