@@ -82,17 +82,15 @@ Outputs:
 🧪 VALIDATED SCENARIOS
 ----------------------------------------------------------------------
 
-[1] Calm
-    Isotropic spread (no wind)
+The model has been tested against several critical wildfire behaviors:
 
-[3] Firebreak
-    Full containment (no spotting)
+Scenario 1 (Calm): Isotropic spread under no-wind conditions.
 
-[4] Moderate Wind
-    Spotting occurs but fails to breach
+Scenario 3 (Firebreak): Total containment by a wide river barrier (No spotting).
 
-[7] Fort McMurray (2016)
-    Reproduces Horse River wildfire breach (~65 km/h wind)
+Scenario 4 (Moderate Wind): Spotting is active but insufficient for a sustained breach.
+
+Scenario 7 (Fort McMurray): Successful reconstruction of the 2016 breach under 65 km/h wind with high-intensity urban ignition.
 
 
 ----------------------------------------------------------------------
