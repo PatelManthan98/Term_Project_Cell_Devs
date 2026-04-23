@@ -101,7 +101,6 @@ Outputs:
 
 Manthan Patel
 School of Information Technology
-Department of Systems and Computer Engineering
 
 
 ======================================================================
