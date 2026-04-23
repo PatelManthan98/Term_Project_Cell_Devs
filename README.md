@@ -15,8 +15,8 @@ This project implements a physics-informed wildfire spread model using the **Asy
 This project was developed and tested on the `devsim` server. To manage Python dependencies without administrative privileges, a virtual environment is used.
 
 ### 1. Python Environment
-```bash
-# Create the virtual environment
+
+Create the virtual environment #
 python3 -m venv .venv
 
 # Activate the environment
