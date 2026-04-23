@@ -1,101 +1,110 @@
-Asymmetric Cell-DEVS Wildfire Simulation
+====================================================================
+        🔥 ASYMMETRIC CELL-DEVS WILDFIRE SIMULATION 🔥
+====================================================================
 
-A physics-informed wildfire spread model built using the Asymmetric Cell-DEVS formalism and executed on the Cadmium v2 discrete-event simulation engine.
-The model integrates heterogeneous terrain, wind forcing, fuel structure, and probabilistic ember spotting to reproduce real wildfire behavior.
+A physics-informed wildfire spread model built using the
+Asymmetric Cell-DEVS formalism and executed on the
+Cadmium v2 discrete-event simulation engine.
 
---------------------------------------------------
+This model integrates:
+• Heterogeneous terrain
+• Wind forcing
+• Fuel structure
+• Probabilistic ember spotting
 
-KEY FEATURES
+→ Designed to reproduce realistic wildfire behavior.
 
-- Asymmetric Topology:
-  Wind and slope effects embedded directly into directional vicinity weights.
+--------------------------------------------------------------------
+🚀 KEY FEATURES
+--------------------------------------------------------------------
 
-- Ember Spotting:
-  Sparse long-range edges simulate river-crossing and extreme-wind ignition.
+◆ Asymmetric Topology
+  Wind and slope effects embedded directly into directional weights.
 
-- Real Geospatial Data:
-  NRCan CDEM — elevation & slope
-  NLCMS-2015 — land-cover & fuel classification
+◆ Ember Spotting
+  Sparse long-range ignition (e.g., river crossing, extreme winds).
 
-- High-Performance Execution:
+◆ Real Geospatial Data
+  • NRCan CDEM  → elevation & slope
+  • NLCMS-2015  → land cover & fuel classification
+
+◆ High-Performance Execution
   Built on Cadmium v2 for asynchronous, event-driven simulation.
 
---------------------------------------------------
+--------------------------------------------------------------------
+⚙️ PREREQUISITES & SETUP
+--------------------------------------------------------------------
 
-PREREQUISITES & ENVIRONMENT SETUP
+Developed on: devsim server  
+Uses: Python virtual environment
 
-This project was developed on the devsim server.
-A Python virtual environment is used to avoid system-level dependency issues.
+1) Create environment
+   python3 -m venv .venv
 
-1. Python Environment
+2) Activate environment
+   source .venv/bin/activate
 
-Create virtual environment:
-python3 -m venv .venv
+3) Install dependencies
+   pip install numpy matplotlib pandas
 
-Activate environment:
-source .venv/bin/activate
-
-Install visualization dependencies:
-pip install numpy matplotlib pandas
-
---------------------------------------------------
-
-RUNNING THE SIMULATION
+--------------------------------------------------------------------
+🏃 RUNNING THE SIMULATION
+--------------------------------------------------------------------
 
 From the project root:
 
-Usage:
-./build/wildfire_sim <scenario_file> <time_steps> <seed>
+   ./build/wildfire_sim <scenario_file> <time_steps> <seed>
 
 Example:
-./build/wildfire_sim scenario.json 500 42
+   ./build/wildfire_sim scenario.json 500 42
 
 Parameters:
-scenario.json — grid, fuel, weather, and topology configuration
-500 — total simulation steps
-42 — random seed for reproducibility
+   scenario.json  → configuration (grid, fuel, weather, topology)
+   500            → number of simulation steps
+   42             → random seed (reproducibility)
 
---------------------------------------------------
+--------------------------------------------------------------------
+📊 VISUALIZATION & OUTPUTS
+--------------------------------------------------------------------
 
-VISUALIZATION & ANALYSIS
+After running, a file is generated:
+   /build/grid_log.csv
 
-After simulation, a grid_log.csv file is generated in /build.
+To visualize:
 
-To generate outputs:
+   source .venv/bin/activate
+   python3 visualize_wildfire.py
 
-Ensure virtual environment is active:
-source .venv/bin/activate
+Outputs:
+   • wildfire_spread.gif   → animated fire progression
+   • PNG charts:
+       - rate of spread
+       - active burning cells
+       - cumulative burn area
 
-Run visualization:
-python3 visualize_wildfire.py
+--------------------------------------------------------------------
+🧪 VALIDATED SCENARIOS
+--------------------------------------------------------------------
 
-Outputs include:
-- wildfire_spread.gif — animated fire progression
-- PNG charts:
-  • rate of spread
-  • active burning cells
-  • cumulative burn area
+[1] Calm
+    → Isotropic spread (no wind)
 
---------------------------------------------------
+[3] Firebreak
+    → River fully contains fire (no spotting)
 
-VALIDATED SCENARIOS
+[4] Moderate Wind
+    → Spotting occurs but fails to breach barrier
 
-Scenario 1 — Calm:
-Isotropic spread under no-wind conditions
+[7] Fort McMurray (2016)
+    → Reproduces Horse River wildfire breach
+      under ~65 km/h winds
 
-Scenario 3 — Firebreak:
-Complete containment by a river (no spotting)
-
-Scenario 4 — Moderate Wind:
-Spotting occurs but cannot sustain a breach
-
-Scenario 7 — Fort McMurray:
-Reproduces the 2016 Horse River breach under 65 km/h winds
-
---------------------------------------------------
-
-AUTHOR
+--------------------------------------------------------------------
+✍️ AUTHOR
+--------------------------------------------------------------------
 
 Manthan Patel
 Department of Systems and Computer Engineering
 Carleton University
+
+====================================================================
