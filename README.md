@@ -1,4 +1,4 @@
-🔥 ASYMMETRIC CELL-DEVS WILDFIRE SIMULATION 🔥 
+**🔥 ASYMMETRIC CELL-DEVS WILDFIRE SIMULATION 🔥 **
 
 
 A physics-informed wildfire spread model built using the
