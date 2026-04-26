@@ -14,7 +14,7 @@ This project implements a physics-informed wildfire spread model using the **Asy
 
 Follow these steps to prepare the environment and install dependencies.
 
-1. Ensure Cadmium v2 is available at $CADMIUM or clone locally
+1. Ensure Cadmium v2 is available at $CADMIUM or clone locally(Mandatory to clone)
 ```
 git clone https://github.com/SimulationEverywhere/cadmium_v2.git cadmium_v2
 ```
@@ -72,4 +72,4 @@ Scenario 4 (Moderate Wind): Spotting is active at 25 km/h, but ignitions remain 
 Scenario 7 (Fort McMurray): Reconstruction of the 2016 breach under 65 km/h wind. The fire bypasses the Athabasca River via long-range spotting and escalates into urban fuels.
 
 **✍️ Author**
-Manthan Patel Department of Systems and Computer Engineering, Carleton University
+Manthan Patel 
